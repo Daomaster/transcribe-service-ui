@@ -1,0 +1,24 @@
+<mat-card class="mat-elevation-z6 auth-card">
+  <mat-card-header>
+    <mat-card-title>Sighup</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="sighupForm">
+      <mat-form-field>
+        <label>
+          <input matInput placeholder="username" formControlName="username">
+        </label>
+      </mat-form-field>
+      <mat-form-field>
+        <label>
+          <input matInput placeholder="password" formControlName="password" type="password">
+        </label>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <span class="spacer"></span>
+    <button mat-raised-button routerLink="/login" [disabled]="loading">Log In</button>
+    <button mat-raised-button color="primary" (click)="sighup()" [disabled]="sighupForm.invalid || loading">Sign Up</button>
+  </mat-card-actions>
+</mat-card>
