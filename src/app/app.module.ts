@@ -7,19 +7,22 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UserService} from './service/user.service';
 import {TranscriptionService} from './service/transcription.service';
 import {AuthService} from './service/auth.service';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {JwtInterceptor} from './service/jwt.interceptor';
 import {LoginComponent} from './login/login.component';
 import {SharedModule} from './shared/shared.module';
-import { SighupComponent } from './signup/sighup.component';
+import {SighupComponent} from './signup/sighup.component';
+import { TranscriptionTableComponent } from './transcription-table/transcription-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SighupComponent
+    SighupComponent,
+    TranscriptionTableComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

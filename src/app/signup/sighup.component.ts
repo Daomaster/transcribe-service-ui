@@ -1,5 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UserService} from '../service/user.service';
+import {User} from '../models/user';
+import {first} from 'rxjs/operators';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sighup',
@@ -10,13 +15,11 @@ export class SighupComponent implements OnInit {
   public sighupForm: FormGroup;
   public loading = false;
 
-  private alive: boolean;
-
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userApi: UserService,
+    private router: Router,
   ) {
-    this.alive = true;
-
     this.initForm();
   }
 
@@ -31,7 +34,17 @@ export class SighupComponent implements OnInit {
   }
 
   public sighup(): void {
-    console.log(this.sighupForm.value);
+    const user = new User(this.sighupForm.value);
+    this.userApi.createUser(user)
+      .pipe(first())
+      .subscribe(
+        () => {
+          this.router.navigate(['login']);
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err);
+        }
+      );
   }
 
 }

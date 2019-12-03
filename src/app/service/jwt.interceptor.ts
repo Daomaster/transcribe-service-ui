@@ -2,27 +2,35 @@ import {Injectable, Injector} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
+import {AuthService} from './auth.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  constructor(private injector: Injector) {
+  constructor(
+    private injector: Injector,
+    private authApi: AuthService,
+  ) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const requestToForward = req;
+    let requestToForward = req;
+
+    const token = this.authApi.getToken();
+
+    if (token) {
+      requestToForward = req.clone({setHeaders: {Authorization: `Bearer ${token.token}`}});
+    }
 
     return next.handle(requestToForward)
       .pipe(tap(
         (event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
-            // do stuff with response if you want
+
           }
         }, (err: any) => {
           if (err instanceof HttpErrorResponse) {
-            if (err.status === 401) {
-              location.reload();
-            }
+
           }
         }
       ));
