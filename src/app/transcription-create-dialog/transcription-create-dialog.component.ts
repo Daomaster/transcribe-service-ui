@@ -12,6 +12,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class TranscriptionCreateDialogComponent {
   public loading = false;
+  public isError = false;
   public createForm: FormGroup;
 
   constructor(
@@ -29,6 +30,7 @@ export class TranscriptionCreateDialogComponent {
   }
 
   public create() {
+    this.isError = false;
     this.loading = true;
 
     // prepare the form data
@@ -49,6 +51,7 @@ export class TranscriptionCreateDialogComponent {
         },
         (err: HttpErrorResponse) => {
           console.log(err);
+          this.isError = true;
           this.loading = false;
         }
       );

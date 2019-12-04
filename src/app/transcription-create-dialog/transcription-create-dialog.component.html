@@ -6,12 +6,13 @@
   <form [formGroup]="createForm">
     <app-file-upload formControlName="videoFile"></app-file-upload>
   </form>
-  <span>Note: This process might take up awhile, and I'm using free tier AWS transcription service (60 minutes per month). File limits to 30 MB</span>
+  <span *ngIf="!isError">Note: This process might take up awhile, and I'm using free tier AWS transcription service (60 minutes per month). File limits to 30 MB</span>
+  <span class="err-msg" *ngIf="isError">Something went wrong please try again!</span>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button mat-button (click)="cancel()">Cancel</button>
-  <button mat-raised-button (click)="create()" [disabled]="loading"
+  <button mat-raised-button (click)="create()" [disabled]="loading || createForm.invalid"
           color="primary">
     <span *ngIf="!loading">
       Add
