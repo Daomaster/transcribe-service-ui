@@ -1,0 +1,25 @@
+<mat-toolbar>
+  <button mat-icon-button color="primary" routerLink="/transcription">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+  <h3>Transcription Detail</h3>
+</mat-toolbar>
+
+<div class="detail-container">
+  <p class="detail-title">ID:</p>
+  <p class="detail-value">{{transcription.id}}</p>
+
+  <p class="detail-title">Username:</p>
+  <p class="detail-value">{{transcription.user.username}}</p>
+
+  <p class="detail-title">File Name:</p>
+  <p class="detail-value">{{transcription.fileName}}</p>
+
+  <p class="detail-title">File Path:</p>
+  <p class="detail-value">{{transcription.filePath}}</p>
+
+  <p class="detail-title">Result:</p>
+  <pre>
+    {{getPrettyJson()}}
+  </pre>
+</div>

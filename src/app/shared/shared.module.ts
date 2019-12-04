@@ -2,13 +2,14 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
   MatButtonModule,
-  MatCardModule,
+  MatCardModule, MatDialogModule, MatIconModule,
   MatInputModule,
   MatProgressSpinnerModule,
   MatTableModule,
   MatToolbarModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [],
@@ -21,6 +22,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatInputModule,
     MatTableModule,
     MatProgressSpinnerModule,
+    MatIconModule,
+    MatDialogModule,
+    FlexLayoutModule,
     ReactiveFormsModule,
   ],
   exports: [
@@ -31,6 +35,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatCardModule,
     MatInputModule,
     MatTableModule,
+    MatIconModule,
+    FlexLayoutModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
   ]

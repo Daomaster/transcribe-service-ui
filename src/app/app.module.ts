@@ -12,14 +12,21 @@ import {JwtInterceptor} from './service/jwt.interceptor';
 import {LoginComponent} from './login/login.component';
 import {SharedModule} from './shared/shared.module';
 import {SighupComponent} from './signup/sighup.component';
-import { TranscriptionTableComponent } from './transcription-table/transcription-table.component';
+import {TranscriptionTableComponent} from './transcription-table/transcription-table.component';
+import {TranscriptionDetailComponent} from './transcription-detail/transcription-detail.component';
+import {TranscriptionCreateDialogComponent} from './transcription-create-dialog/transcription-create-dialog.component';
+import {MatDialogModule} from '@angular/material';
+import {FileUploadComponent} from './file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    FileUploadComponent,
     LoginComponent,
     SighupComponent,
-    TranscriptionTableComponent
+    TranscriptionTableComponent,
+    TranscriptionDetailComponent,
+    TranscriptionCreateDialogComponent
   ],
   imports: [
     HttpClientModule,
@@ -27,6 +34,7 @@ import { TranscriptionTableComponent } from './transcription-table/transcription
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    MatDialogModule,
   ],
   providers: [
     UserService,
@@ -38,6 +46,9 @@ import { TranscriptionTableComponent } from './transcription-table/transcription
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    TranscriptionCreateDialogComponent,
+  ],
 })
 export class AppModule { }

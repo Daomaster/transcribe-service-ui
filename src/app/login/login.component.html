@@ -19,6 +19,11 @@
   <mat-card-actions align="end">
     <span class="spacer"></span>
     <button mat-raised-button routerLink="/sighup" [disabled]="loading">Sigh Up</button>
-    <button mat-raised-button color="primary" (click)="login()" [disabled]="loginForm.invalid || loading">Log In</button>
+    <button mat-raised-button color="primary" (click)="login()" [disabled]="loginForm.invalid || loading">
+      <span *ngIf="!loading">
+      Log In
+      </span>
+      <mat-spinner *ngIf="loading" color="accent" [diameter]="30" [strokeWidth]="3"></mat-spinner>
+    </button>
   </mat-card-actions>
 </mat-card>

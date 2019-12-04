@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../service/user.service';
 import {User} from '../models/user';
@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
   templateUrl: './sighup.component.html',
   styleUrls: ['./sighup.component.sass']
 })
-export class SighupComponent implements OnInit {
+export class SighupComponent {
   public sighupForm: FormGroup;
   public loading = false;
 
@@ -23,9 +23,6 @@ export class SighupComponent implements OnInit {
     this.initForm();
   }
 
-  ngOnInit() {
-  }
-
   private initForm(): void {
     this.sighupForm = this.fb.group({
       username: new FormControl('', [Validators.required]),
@@ -34,15 +31,21 @@ export class SighupComponent implements OnInit {
   }
 
   public sighup(): void {
+    this.loading = true;
+
     const user = new User(this.sighupForm.value);
     this.userApi.createUser(user)
       .pipe(first())
       .subscribe(
         () => {
           this.router.navigate(['login']);
+          this.loading = false;
         },
         (err: HttpErrorResponse) => {
           console.log(err);
+          this.sighupForm.controls.username.setErrors({});
+          this.sighupForm.controls.password.setErrors({});
+          this.loading = false;
         }
       );
   }

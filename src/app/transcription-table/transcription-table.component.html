@@ -1,1 +1,59 @@
-<p>transcription-table works!</p>
+<mat-card>
+  <mat-card-title>
+    Transcription
+    <div class="action-group">
+      <button mat-raised-button color="primary" (click)="createTranscription()">Create</button>
+    </div>
+  </mat-card-title>
+  <mat-card-content>
+    <mat-table [dataSource]="dataSource">
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
+
+      <!-- Username Column -->
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef> Username </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.user.username}} </mat-cell>
+      </ng-container>
+
+      <!-- File Name Column -->
+      <ng-container matColumnDef="fileName">
+        <mat-header-cell *matHeaderCellDef> File Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.fileName}} </mat-cell>
+      </ng-container>
+
+      <!-- File Path Column -->
+      <ng-container matColumnDef="filePath">
+        <mat-header-cell *matHeaderCellDef> File Path </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="long-text">
+            {{element.filePath}}
+         </span> </mat-cell>
+      </ng-container>
+
+      <!-- Result Column -->
+      <ng-container matColumnDef="result">
+        <mat-header-cell *matHeaderCellDef> Result </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+         <span class="long-text">
+            {{element.result}}
+         </span>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Menu Column -->
+      <ng-container matColumnDef="menu">
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-raised-button [routerLink]="generateRoute(element)">Detail</button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card-content>
+</mat-card>

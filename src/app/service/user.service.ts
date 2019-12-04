@@ -8,11 +8,12 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private readonly apiUrl = environment.apiUrl;
+  private readonly userApiUrl = `${environment.apiUrl}/users`;
 
   constructor(private http: HttpClient) { }
 
-  public createUser(user: User): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/users`, user);
+  // create user
+  public createUser(user: User): Observable<null> {
+    return this.http.post<null>(this.userApiUrl, user);
   }
 }

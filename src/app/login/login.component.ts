@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../service/auth.service';
 import {User} from '../models/user';
@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   public loginForm: FormGroup;
   public loading = false;
 
@@ -24,9 +24,6 @@ export class LoginComponent implements OnInit {
     this.initForm();
   }
 
-  ngOnInit() {
-  }
-
   private initForm(): void {
     this.loginForm = this.fb.group({
       username: new FormControl('', [Validators.required]),
@@ -36,16 +33,20 @@ export class LoginComponent implements OnInit {
 
   public login(): void {
     const user = new User(this.loginForm.value);
+    this.loading = true;
+
     this.authApi.login(user)
       .pipe(first())
       .subscribe(
         (token: Jwt) => {
           this.authApi.saveToken(token);
           this.router.navigate(['transcription']);
+          this.loading = false;
         },
         (err: HttpErrorResponse) => {
           console.log(err);
           this.loginForm.controls.password.setErrors({});
+          this.loading = false;
         }
       );
   }
