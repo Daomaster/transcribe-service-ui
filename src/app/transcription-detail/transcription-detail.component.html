@@ -5,7 +5,7 @@
   <h3>Transcription Detail</h3>
 </mat-toolbar>
 
-<div class="detail-container">
+<div class="detail-container" *ngIf="transcription">
   <p class="detail-title">ID:</p>
   <p class="detail-value">{{transcription.id}}</p>
 

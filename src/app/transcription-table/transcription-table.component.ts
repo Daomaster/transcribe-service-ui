@@ -27,7 +27,6 @@ export class TranscriptionTableComponent {
       .pipe(first())
       .subscribe(
         (trans: Transcription[]) => {
-          console.log(trans);
           this.dataSource = new MatTableDataSource<Transcription>(trans);
         },
         (err: HttpErrorResponse) => {

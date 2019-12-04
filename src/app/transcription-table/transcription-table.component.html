@@ -6,7 +6,7 @@
     </div>
   </mat-card-title>
   <mat-card-content>
-    <mat-table [dataSource]="dataSource">
+    <mat-table [dataSource]="dataSource" *ngIf="dataSource">
       <!-- ID Column -->
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
