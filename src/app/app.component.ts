@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {AuthService} from './service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'transcribe-service-ui';
+  public title = 'Transcription Service';
+
+  constructor(
+    private authApi: AuthService,
+  ) {
+  }
+
+  public logout() {
+    this.authApi.logout();
+  }
+
+  public isLoggedIn(): boolean {
+    return this.authApi.isLoggedIn();
+  }
 }

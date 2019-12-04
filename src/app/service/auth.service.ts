@@ -4,15 +4,22 @@ import {environment} from '../../environments/environment';
 import {User} from '../models/user';
 import {Observable} from 'rxjs';
 import {Jwt} from '../models/jwt';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
+  private readonly tokenLocation = 'jwt';
   private readonly authApiUrl = `${environment.apiUrl}/auth`;
   private jwt: Jwt | null = null;
 
-  constructor(private http: HttpClient) { }
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) { }
 
   // login base on the user info
   public login(user: User): Observable<Jwt> {
@@ -21,16 +28,23 @@ export class AuthService {
 
   // check if the user is logged in
   public isLoggedIn(): boolean {
-    return this.jwt != null;
+    return !!this.getToken();
   }
 
   // getter for the token, currently saved in mem
   public getToken(): Jwt | null {
-    return this.jwt;
+    return JSON.parse(localStorage.getItem(this.tokenLocation)) as Jwt | null;
   }
 
   // save the token in mem
   public saveToken(token: Jwt) {
     this.jwt = token;
+    localStorage.setItem(this.tokenLocation, JSON.stringify(token));
+  }
+
+  // logout
+  public logout() {
+    localStorage.removeItem(this.tokenLocation);
+    this.router.navigate(['/login']);
   }
 }

@@ -1,5 +1,7 @@
 <mat-toolbar color="primary">
   <span>Transcription Service</span>
+  <span class="spacer"></span>
+  <button mat-raised-button (click)="logout()" *ngIf="isLoggedIn()">Log Out</button>
 </mat-toolbar>
 
 <router-outlet></router-outlet>

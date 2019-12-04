@@ -21,6 +21,11 @@ export class LoginComponent {
     private authApi: AuthService,
     private router: Router,
   ) {
+    // check if the user already logged in
+    if (this.authApi.isLoggedIn()) {
+      this.router.navigate(['transcription']);
+    }
+
     this.initForm();
   }
 
