@@ -31,11 +31,6 @@ export class AuthService {
     return !!this.getToken();
   }
 
-  // getter for the token, currently saved in mem
-  public getToken(): Jwt | null {
-    return JSON.parse(localStorage.getItem(this.tokenLocation)) as Jwt | null;
-  }
-
   // save the token in mem
   public saveToken(token: Jwt) {
     this.jwt = token;
@@ -44,7 +39,34 @@ export class AuthService {
 
   // logout
   public logout() {
-    localStorage.removeItem(this.tokenLocation);
+    this.deleteToken();
     this.router.navigate(['/login']);
+  }
+
+  // getter for the token, currently saved in mem
+  public getToken(): Jwt | null {
+    const jwt = new Jwt();
+    const token = JSON.parse(localStorage.getItem(this.tokenLocation));
+
+    // check the token exist in local storage
+    if (token == null) {
+      return null;
+    }
+
+    jwt.token = token.token;
+    jwt.expire = new Date(token.expire);
+
+    // check the time if it expired
+    if (jwt.expire <= new Date()) {
+      this.deleteToken();
+      return null;
+    }
+
+    return jwt;
+  }
+
+  // delete token from local storage
+  private deleteToken() {
+    localStorage.removeItem(this.tokenLocation);
   }
 }
