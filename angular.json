@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "transcribe-service-ui"
+  "defaultProject": "transcribe-service-ui",
+  "cli": {
+    "analytics": "e333e2a9-aedf-43af-a011-110f3135cee1"
+  }
 }

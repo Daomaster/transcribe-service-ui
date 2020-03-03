@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {TranscriptionService} from '../service/transcription.service';
 import {Transcription} from '../models/transcription';
-import {MatDialog, MatTableDataSource} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import {first} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 import {TranscriptionCreateDialogComponent} from '../transcription-create-dialog/transcription-create-dialog.component';

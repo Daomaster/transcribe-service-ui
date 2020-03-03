@@ -15,7 +15,7 @@ import {SighupComponent} from './signup/sighup.component';
 import {TranscriptionTableComponent} from './transcription-table/transcription-table.component';
 import {TranscriptionDetailComponent} from './transcription-detail/transcription-detail.component';
 import {TranscriptionCreateDialogComponent} from './transcription-create-dialog/transcription-create-dialog.component';
-import {MatDialogModule} from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 import {FileUploadComponent} from './file-upload/file-upload.component';
 
 @NgModule({
